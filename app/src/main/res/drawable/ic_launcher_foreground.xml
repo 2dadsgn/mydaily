@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Minimal Calendar Outer Frame & Rings -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M67,28v6h-5v-6h-16v6h-5v-6h-5c-3.3,0 -6,2.7 -6,6v38c0,3.3 2.7,6 6,6h36c3.3,0 6,-2.7 6,-6V34c0,-3.3 -2.7,-6 -6,-6H67zM72,72H36V47h36V72zM72,42H36v-6h36V42z" />
+    <!-- Minimal Calendar Day Dots -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M42,53h6v6h-6zM51,53h6v6h-6zM60,53h6v6h-6zM42,62h6v6h-6zM51,62h6v6h-6z" />
+</vector>

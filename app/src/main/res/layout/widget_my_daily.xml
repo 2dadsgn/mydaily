@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_bg"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <!-- Header Row: Week Range + Filter & Refresh -->
+    <LinearLayout
+        android:id="@+id/widget_header_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="6dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/widget_date_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="This Week"
+                    android:textColor="@color/widget_text_primary"
+                    android:textSize="14.5sp"
+                    android:textStyle="bold" />
+
+                <!-- Badge shown when there is a collision on another day -->
+                <TextView
+                    android:id="@+id/widget_other_day_badge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:background="@drawable/widget_future_collision_bg"
+                    android:paddingHorizontal="6dp"
+                    android:paddingVertical="2dp"
+                    android:text="⚠ Conflict"
+                    android:textColor="#FFD97706"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/widget_sources_summary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Week View • All Events"
+                android:textColor="@color/widget_text_secondary"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/widget_filter_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/widget_pill_bg"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="4dp"
+            android:text="All"
+            android:textColor="@color/widget_text_primary"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/widget_refresh_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/widget_pill_bg"
+            android:paddingHorizontal="9dp"
+            android:paddingVertical="4dp"
+            android:text="↻"
+            android:textColor="@color/widget_accent_blue"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- 7-Day Week Overview Bar (Day 0 = TODAY highlighted) -->
+    <LinearLayout
+        android:id="@+id/widget_week_strip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:orientation="horizontal"
+        android:weightSum="7">
+
+        <!-- Day 0 (TODAY - Highlighted) -->
+        <LinearLayout
+            android:id="@+id/widget_day_col_0"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="3dp"
+            android:layout_weight="1"
+            android:background="@drawable/widget_day_today_bg"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingVertical="4dp">
+
+            <TextView
+                android:id="@+id/widget_day_name_0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TODAY"
+                android:textColor="#FFFFFFFF"
+                android:textSize="8.5sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/widget_day_num_0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="8"
+                android:textColor="#FFFFFFFF"
+                android:textSize="12.5sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/widget_day_dot_0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="·"
+                android:textColor="#FFFFFFFF"
+                android:textSize="9sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Day 1 -->
+        <LinearLayout
+            android:id="@+id/widget_day_col_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="3dp"
+            android:layout_weight="1"
+            android:background="@drawable/widget_card_bg"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingVertical="4dp">
+
+            <TextView
+                android:id="@+id/widget_day_name_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mon"
+                android:textColor="@color/widget_text_secondary"
+                android:textSize="9.5sp" />
+
+            <TextView
+                android:id="@+id/widget_day_num_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="9"
+                android:textColor="@color/widget_text_primary"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/widget_day_dot_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="·"
+                android:textColor="@color/widget_text_secondary"
+                android:textSize="9sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Day 2 -->
+        <LinearLayout
+            android:id="@+id/widget_day_col_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="3dp"
+            android:layout_weight="1"
+            android:background="@drawable/widget_card_bg"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingVertical="4dp">
+
+            <TextView
+                android:id="@+id/widget_day_name_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tue"
+                android:textColor="@color/widget_text_secondary"
+                android:textSize="9.5sp" />
+
+            <TextView
+                android:id="@+id/widget_day_num_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10"
+                android:textColor="@color/widget_text_primary"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/widget_day_dot_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="·"
+                android:textColor="@color/widget_text_secondary"
+                android:textSize="9sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Day 3 -->
+        <LinearLayout
+            android:id="@+id/widget_day_col_3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="3dp"
+            android:layout_weight="1"
+            android:background="@drawable/widget_card_bg"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingVertical="4dp">
+
+            <TextView
+                android:id="@+id/widget_day_name_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Wed"
+                android:textColor="@color/widget_text_secondary"
+                android:textSize="9.5sp" />
+
+            <TextView
+                android:id="@+id/widget_day_num_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="11"
+                android:textColor="@color/widget_text_primary"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/widget_day_dot_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="·"
+                android:textColor="@color/widget_text_secondary"
+                android:textSize="9sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Day 4 -->
+        <LinearLayout
+            android:id="@+id/widget_day_col_4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="3dp"
+            android:layout_weight="1"
+            android:background="@drawable/widget_card_bg"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingVertical="4dp">
+
+            <TextView
+                android:id="@+id/widget_day_name_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thu"
+                android:textColor="@color/widget_text_secondary"
+                android:textSize="9.5sp" />
+
+            <TextView
+                android:id="@+id/widget_day_num_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12"
+                android:textColor="@color/widget_text_primary"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/widget_day_dot_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="·"
+                android:textColor="@color/widget_text_secondary"
+                android:textSize="9sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Day 5 -->
+        <LinearLayout
+            android:id="@+id/widget_day_col_5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="3dp"
+            android:layout_weight="1"
+            android:background="@drawable/widget_card_bg"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingVertical="4dp">
+
+            <TextView
+                android:id="@+id/widget_day_name_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fri"
+                android:textColor="@color/widget_text_secondary"
+                android:textSize="9.5sp" />
+
+            <TextView
+                android:id="@+id/widget_day_num_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="13"
+                android:textColor="@color/widget_text_primary"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/widget_day_dot_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="·"
+                android:textColor="@color/widget_text_secondary"
+                android:textSize="9sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Day 6 -->
+        <LinearLayout
+            android:id="@+id/widget_day_col_6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/widget_card_bg"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingVertical="4dp">
+
+            <TextView
+                android:id="@+id/widget_day_name_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sat"
+                android:textColor="@color/widget_text_secondary"
+                android:textSize="9.5sp" />
+
+            <TextView
+                android:id="@+id/widget_day_num_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="14"
+                android:textColor="@color/widget_text_primary"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/widget_day_dot_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="·"
+                android:textColor="@color/widget_text_secondary"
+                android:textSize="9sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Today's Collision Status Banner (shown only if today has a conflict) -->
+    <LinearLayout
+        android:id="@+id/widget_collision_banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/widget_collision_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="4dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/widget_collision_banner_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="⚠ Conflict today"
+            android:textColor="#FFEF4444"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Banner for Collisions on ANOTHER Day -->
+    <LinearLayout
+        android:id="@+id/widget_future_collision_banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/widget_future_collision_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="4dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/widget_future_collision_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="⚠ Conflict on another day"
+            android:textColor="#FFD97706"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Scrollable Week Schedule List (All Days & Events in the Week) -->
+    <ListView
+        android:id="@+id/widget_events_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="5dp" />
+
+    <!-- Empty state -->
+    <TextView
+        android:id="@+id/widget_empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="No active events scheduled for this week."
+        android:textColor="@color/widget_text_secondary"
+        android:textSize="12sp"
+        android:visibility="gone" />
+
+</LinearLayout>

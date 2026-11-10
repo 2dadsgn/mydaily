@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MyDaily</string>
+    <string name="widget_description">Unified Google Calendar, Outlook Appointments, and Google Tasks with real-time Collision Detection.</string>
+</resources>
+

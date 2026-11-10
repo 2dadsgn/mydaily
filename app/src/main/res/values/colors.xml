@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="widget_bg_fill">#FAF8FAFC</color>
+    <color name="widget_bg_stroke">#3364748B</color>
+    <color name="widget_card_fill">#FFFFFFFF</color>
+    <color name="widget_pill_fill">#FFE2E8F0</color>
+    <color name="widget_text_primary">#FF0F172A</color>
+    <color name="widget_text_secondary">#FF475569</color>
+    <color name="widget_text_muted">#FF64748B</color>
+    <color name="widget_accent_blue">#FF2563EB</color>
+</resources>
+
